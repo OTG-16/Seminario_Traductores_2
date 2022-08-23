@@ -57,20 +57,14 @@ def Automata(cadenaUsuario):
                         elif cadena[indice]=='<' or cadena[indice]=='>':
                             lexema+=cadena[indice]
                             token='opRelac'
-                            #estado=20 
                             estado=12
                             num=7 
-
-                        elif cadena[indice]=='||':
+                        elif cadena[indice]=='|':
                             lexema+=cadena[indice]
-                            token='opOr'
-                            estado=20 
-                            num=8  
-                        elif cadena[indice]=='&&':
+                            estado=13  
+                        elif cadena[indice]=='&':
                             lexema+=cadena[indice]
-                            token='opAnd'
-                            estado=20 
-                            num=9
+                            estado=14 
                         elif cadena[indice]=='!':
                             lexema+=cadena[indice]
                             token='opNot'
@@ -210,7 +204,24 @@ def Automata(cadenaUsuario):
                             token='opRelac'
                             indice+=1
                             num=7
-
+                    elif estado==13:
+                        if cadena[indice]!='|':
+                            estado=20
+                        else:
+                            estado=20
+                            lexema+=cadena[indice]
+                            token='opOr'
+                            indice+=1
+                            num=8
+                    elif estado==14:
+                        if cadena[indice]!='&':
+                            estado=20
+                        else:
+                            estado=20
+                            lexema+=cadena[indice]
+                            token='opAnd'
+                            indice+=1
+                            num=9
                 estado=0 #Se establece el estado como el inicial
                 elementos.append({'lexema':lexema,'token':token,'num':num})  #Se guarda la info en la lista elementos
         #Se itera la lista de elementos para detectar si hay palabras reservadas y se establecen los
