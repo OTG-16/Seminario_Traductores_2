@@ -114,7 +114,7 @@ def Automata(cadenaUsuario):
                             lexema+=cadena[indice] #Al lexema se le agrega el contenido de cadena[indice]
                             token='identificador' #El token se define como un identificador
                             indice+=1 #Se le suma 1 a la variable indice (se pasa a la siguiente posición)
-                            num=1 #La variable num se establece con el número 1
+                            num=0 #La variable num se establece con el número 1
                         #Si en la posición cadena[indice] NO hay un digito, una letra o un guión bajo
                         else:
                             estado=20 #Se establece el estado como el final
