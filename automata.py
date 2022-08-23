@@ -54,11 +54,13 @@ def Automata(cadenaUsuario):
                             token='opMul'
                             estado=20 
                             num=6
-                        elif cadena[indice]=='<' or cadena[indice]=='<=' or cadena[indice]=='>' or cadena[indice]=='>=':
+                        elif cadena[indice]=='<' or cadena[indice]=='>':
                             lexema+=cadena[indice]
                             token='opRelac'
-                            estado=20 
+                            #estado=20 
+                            estado=12
                             num=7 
+
                         elif cadena[indice]=='||':
                             lexema+=cadena[indice]
                             token='opOr'
@@ -191,13 +193,24 @@ def Automata(cadenaUsuario):
                             estado=20
                             lexema+=cadena[indice]
                             token='cadena'
+                            indice+=1
                             num=3
                         else:
                             while(indice<=(len(cadena)-1) and cadena[indice]!='"'): 
                                 lexema+=cadena[indice]
                                 token='cadena'
                                 num=3
-                                indice+=1               
+                                indice+=1
+                    elif estado==12:
+                        if cadena[indice]!='=':
+                            estado=20
+                        else:
+                            estado=20
+                            lexema+=cadena[indice]
+                            token='opRelac'
+                            indice+=1
+                            num=7
+
                 estado=0 #Se establece el estado como el inicial
                 elementos.append({'lexema':lexema,'token':token,'num':num})  #Se guarda la info en la lista elementos
         #Se itera la lista de elementos para detectar si hay palabras reservadas y se establecen los
